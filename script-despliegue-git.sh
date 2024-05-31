@@ -8,16 +8,16 @@ if [[ ! -d ~/.ssh ]]; then
 fi
 
 if [ `ls /contenido-ssh | wc -l` -gt 0  ]; then
-    cp /contenido-ssh/* /root/.ssh
+    cp /contenido-ssh/* ~/.ssh
 fi
 
-chmod -R 644 $HOME/.ssh/ && chmod 400 $HOME/.ssh/clave-github
+chmod -R 644 ~/.ssh/ && chmod 400 ~/.ssh/clave-github
 
 # iniciamos ssh-agent
 eval `ssh-agent`
 
 # añadimos la clave privada a ssh-agent, la clave no debe tener passphrase, de lo contrario no será automatizable
-ssh-add $HOME/.ssh/clave-github
+ssh-add ~/.ssh/clave-github
 
 # congifuramos el nombre de usuario y cuenta de correo locales
 git config --global user.name "tfg2asircanaveral2024"
@@ -38,7 +38,7 @@ done
 # si el valor de $REMOTO_EXISTE sigue siendo 0, el remoto 'original' no existía, así que lo creamos
 if [[ $REMOTO_EXISTE -eq 0 ]]; then
     # debes cambiar esta URL por el nombre del repositorio
-    git remote add original git@github.com:tfg2asircanaveral2024/6-proyecto-powershell-base-con-jenkinsfiles.git
+    git remote add original git@github.com:tfg2asircanaveral2024/6-proyecto-powershell-base.git
 fi
 
 # hacemos que la rama produccion apunte al commit actual y cambiamos a ella
